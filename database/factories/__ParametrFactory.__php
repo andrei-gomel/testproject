@@ -1,0 +1,74 @@
+
+<?php
+
+use App\Models\Test;
+use Faker\Generator as Faker;
+
+/*
+|--------------------------------------------------------------------------
+| Model Factories
+|--------------------------------------------------------------------------
+|
+| This directory should contain each of the model factory definitions for
+| your application. Factories provide a convenient way to generate new
+| model instances for testing / seeding your application's database.
+|
+*/
+
+$factory->define(App\Models\Parametr::class, function (Faker $faker) {
+
+    $name = $faker->name;
+    $first_name = $faker->firstName;
+    $last_name = $faker->lastName;
+    $eye_color = $faker->colorName;
+    $profession = $faker->jobTitle;
+    $phone = $faker->e164PhoneNumber;
+    $country = $faker->country;
+    $street = $faker->streetName;
+    $age = $faker->numberBetween(12, 74);
+    $ves = $faker->numberBetween(20, 80);
+    $rost = $faker->numberBetween(150, 200);
+    $razmer = $faker->numberBetween(30, 60);
+    $number = $faker->numberBetween(1000000, 2000000);
+    $val1 = $faker->randomFloat(2, 0, 10000);
+    $val2 = $faker->randomFloat(2, 0, 10000);
+    $val3 = $faker->randomFloat(2, 0, 10000);
+    $val4 = $faker->randomFloat(2, 0, 10000);
+    $val5 = $faker->randomFloat(2, 0, 10000);
+    $txtval1 = $faker->sentence(rand(10,20), true);
+    $txtval2 = $faker->sentence(rand(10,20), true);
+    $txtval3 = $faker->sentence(rand(10,20), true);
+    $txtval4 = $faker->sentence(rand(10,20), true);
+    $txtval5 = $faker->sentence(rand(10,20), true);
+    $createdAt = $faker->dateTimeBetween('-3 months','-2 months');
+
+    $data = [
+        'name' => $name,
+        'first_name' => $first_name,
+        'last_name' => $last_name,
+        'eye_color' => $eye_color,
+        'profession' => $profession,
+        'phone' => $phone,
+        'country' => $country,
+        'street' => $street,
+        'age' => $age,
+        'ves' => $ves,
+        'rost' => $rost,
+        'razmer' => $razmer,
+        'number' => $number,
+        'val1' => $val1,
+        'val2' => $val2,
+        'val3' => $val3,
+        'val4' => $val4,
+        'val5' => $val5,
+        'txtval1' => $txtval1,
+        'txtval2' => $txtval2,
+        'txtval3' => $txtval3,
+        'txtval4' => $txtval4,
+        'txtval5' => $txtval5,
+        'created_at' => $createdAt,
+        'updated_at' => $createdAt,
+    ];
+
+    return $data;
+});

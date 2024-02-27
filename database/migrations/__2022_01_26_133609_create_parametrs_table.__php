@@ -1,0 +1,55 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateParametrsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('parametrs', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('eye_color');
+            $table->string('profession');
+            $table->string('phone');
+            $table->string('country');
+            $table->string('street');
+            $table->integer('age');
+            $table->integer('ves');
+            $table->integer('rost');
+            $table->integer('razmer');
+            $table->integer('number');
+            $table->double('val1');
+            $table->double('val2');
+            $table->double('val3');
+            $table->double('val4');
+            $table->double('val5');
+            $table->text('txtval1');
+            $table->text('txtval2');
+            $table->text('txtval3');
+            $table->text('txtval4');
+            $table->text('txtval5');
+
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('parametrs');
+    }
+}
