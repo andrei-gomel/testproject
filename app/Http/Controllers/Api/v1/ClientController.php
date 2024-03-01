@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ClientUpdateRequest;
 use App\Models\Client;
 use Illuminate\Http\Request;
 
@@ -15,6 +16,7 @@ class ClientController extends Controller
      */
     public function index()
     {
+        header('Content-Type: application/json; charset=utf-8');
         return response(Client::all());
     }
 
@@ -45,9 +47,16 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id): object
     {
-        return response(Client::find($id));
+        header('Content-Type: application/json; charset=utf-8');
+
+        $client = Client::find($id);
+
+        if($client)
+            return response($client);
+        else
+            return response()->json(['message' => 'Запись не найдена']);
     }
 
     /**
@@ -65,22 +74,30 @@ class ClientController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Client $client
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Client $client)
     {
-        //
+        header('Content-Type: application/json; charset=utf-8');
+
+        $data = $request->all();
+
+        $client->update($data);
+
+        return response()->json($client);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        //
+        $client = Client::find($id)->delete();
+
+        return response()->json(['message' => 'Запись успешно удалена']);
     }
 }
