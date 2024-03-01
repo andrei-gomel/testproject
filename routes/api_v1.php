@@ -22,7 +22,3 @@ Route::patch('/clients/{client}', [App\Http\Controllers\Api\v1\ClientController:
 Route::post('/clients', [App\Http\Controllers\Api\v1\ClientController::class, 'store']);
 
 Route::delete('/clients/{id}', [App\Http\Controllers\Api\v1\ClientController::class, 'destroy']);
-
-/*Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});*/
