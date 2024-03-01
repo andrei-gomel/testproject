@@ -38,7 +38,13 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        header('Content-Type: application/json; charset=utf-8');
+
+        $data = $request->all();
+
+        $client = Client::create($data);
+
+        return response()->json($client);
     }
 
     /**
@@ -77,7 +83,7 @@ class ClientController extends Controller
      * @param  Client $client
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Client $client)
+    public function update(ClientUpdateRequest $request, Client $client)
     {
         header('Content-Type: application/json; charset=utf-8');
 
