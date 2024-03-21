@@ -16,8 +16,10 @@ class ClientController extends Controller
      */
     public function index()
     {
-        header('Content-Type: application/json; charset=utf-8');
-        return response(Client::all());
+        /*header('Content-Type: application/json; charset=utf-8');
+        return response(Client::all());*/
+
+        return response()->json(Client::all());
     }
 
     /**
@@ -28,7 +30,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        header('Content-Type: application/json; charset=utf-8');
+        //header('Content-Type: application/json; charset=utf-8');
 
         $data = $request->all();
 
@@ -43,14 +45,12 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(int $id): object
+    public function show(int $id)
     {
-        header('Content-Type: application/json; charset=utf-8');
+        //$client = Client::find($id);
 
-        $client = Client::find($id);
-
-        if($client)
-            return response($client);
+        if($client = Client::find($id))
+            return response()->json($client);
         else
             return response()->json(['message' => 'Запись не найдена']);
     }
@@ -64,7 +64,7 @@ class ClientController extends Controller
      */
     public function update(ClientUpdateRequest $request, Client $client)
     {
-        header('Content-Type: application/json; charset=utf-8');
+        //header('Content-Type: application/json; charset=utf-8');
 
         $data = $request->all();
 
