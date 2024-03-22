@@ -16,10 +16,10 @@ class ClientController extends Controller
      */
     public function index()
     {
-        /*header('Content-Type: application/json; charset=utf-8');
-        return response(Client::all());*/
+        if (!$clients = Client::all()) 
+            return response()->json(['message' => 'Не удалось получить записи'], 500);
 
-        return response()->json(Client::all());
+        return response()->json($clients);
     }
 
     /**
@@ -30,11 +30,10 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //header('Content-Type: application/json; charset=utf-8');
-
         $data = $request->all();
 
-        $client = Client::create($data);
+        if(!$client = Client::create($data))
+            return response()->json(['message' => 'Не удалось сохранить запись'], 500);
 
         return response()->json($client);
     }
@@ -47,12 +46,10 @@ class ClientController extends Controller
      */
     public function show(int $id)
     {
-        //$client = Client::find($id);
+        if(!$client = Client::find($id))       
+            return response()->json(['message' => 'Запись не найдена'], 404);
 
-        if($client = Client::find($id))
-            return response()->json($client);
-        else
-            return response()->json(['message' => 'Запись не найдена']);
+        return response()->json($client);
     }
 
     /**
@@ -64,11 +61,10 @@ class ClientController extends Controller
      */
     public function update(ClientUpdateRequest $request, Client $client)
     {
-        //header('Content-Type: application/json; charset=utf-8');
-
         $data = $request->all();
 
-        $client->update($data);
+        if(!$client->update($data))
+            return response()->json(['message' => 'Не удалось обновить запись'], 500);
 
         return response()->json($client);
     }
@@ -81,7 +77,11 @@ class ClientController extends Controller
      */
     public function destroy(int $id)
     {
-        $client = Client::find($id)->delete();
+        if(!$client = Client::find($id))
+            return response()->json(['message' => 'Запись не найдена'], 404);
+
+        if(!$client->delete())
+            return response()->json(['message' => 'Не удалось удалить запись'], 500);
 
         return response()->json(['message' => 'Запись успешно удалена']);
     }
